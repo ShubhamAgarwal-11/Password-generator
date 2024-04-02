@@ -1,6 +1,7 @@
 import { useState } from "react";
 function App() {
   const [password,setPassword] = useState("");
+  const [length,setLength] = useState(8);
   return (
     <>
       <div className="className='w-full max-w-md shadow-md mx-auto rounded-lg px-4 my-8 py-3 text-orange-500 bg-gray-800">
@@ -14,6 +15,19 @@ function App() {
             value={password}
           />
           <button className="text-white bg-blue-700 px-4 py-1">copy</button>
+        </div>
+        <div className="flex text-smgap-x-2">
+          <div className="flex items-center gap-x-1">
+              <input
+                type="range"
+                min={5}
+                max={100}
+                value={length}
+                onChange={(e)=>{setLength(e.target.value)}}
+              />
+              <label>Length: {length}</label>
+          </div>
+          
         </div>
       </div>
     </>

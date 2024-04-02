@@ -4,6 +4,7 @@ function App() {
   const [length,setLength] = useState(8);
   const [numberAllowed,setNumberAllowed] = useState(false);
   const [charAllowed,setCharAllowed] = useState(false);
+  const [buttonText,setButtonText] = useState('copy');
   
   const passwordGenerator = useCallback(()=>{
     let pass ="";
@@ -26,6 +27,10 @@ function App() {
   const copyClipboardPassword = useCallback(()=>{
     window.navigator.clipboard.writeText(password);
     passwordRef.current?.select();
+    setButtonText("clicked!!!");
+    setTimeout(() => {
+      setButtonText('copy');
+    }, 1000);
   },[password])
 
 
@@ -42,7 +47,7 @@ function App() {
             value={password}
             ref={passwordRef}
           />
-          <button className="text-white bg-blue-700 px-4 py-1" onClick={copyClipboardPassword}>copy</button>
+          <button className="text-white bg-blue-700 px-4 py-1" onClick={copyClipboardPassword}>{buttonText}</button>
         </div>
         <div className="flex text-smgap-x-2">
           <div className="flex items-center gap-x-1">

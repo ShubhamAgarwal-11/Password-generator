@@ -3,6 +3,7 @@ function App() {
   const [password,setPassword] = useState("");
   const [length,setLength] = useState(8);
   const [numberAllowed,setNumberAllowed] = useState(false);
+  const [charAllowed,setCharAllowed] = useState(false);
   
   return (
     <>
@@ -36,10 +37,21 @@ function App() {
               onChange={()=>{
                 setNumberAllowed((prev)=> !prev)
               }}
+              id="numberInput"
             />
-            <label>Numbers</label>
+            <label htmlFor="numberInput">Numbers</label>
           </div>
-          
+          <div className="flex items-center gap-x-1">
+            <input
+              type="checkbox"
+              id="charInput"
+              defaultChecked = {charAllowed}
+              onChange={()=>{
+                setCharAllowed((prev)=>!prev)
+              }}
+            />
+            <label htmlFor="charInput">Characters</label>
+          </div>
         </div>
       </div>
     </>

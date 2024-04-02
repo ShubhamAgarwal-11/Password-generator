@@ -2,6 +2,8 @@ import { useState } from "react";
 function App() {
   const [password,setPassword] = useState("");
   const [length,setLength] = useState(8);
+  const [numberAllowed,setNumberAllowed] = useState(false);
+  
   return (
     <>
       <div className="className='w-full max-w-md shadow-md mx-auto rounded-lg px-4 my-8 py-3 text-orange-500 bg-gray-800">
@@ -26,6 +28,16 @@ function App() {
                 onChange={(e)=>{setLength(e.target.value)}}
               />
               <label>Length: {length}</label>
+          </div>
+          <div className="flex items-center gap-x-1 px-2">
+            <input
+              type="checkbox"
+              defaultChecked = {numberAllowed}
+              onChange={()=>{
+                setNumberAllowed((prev)=> !prev)
+              }}
+            />
+            <label>Numbers</label>
           </div>
           
         </div>

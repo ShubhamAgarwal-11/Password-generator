@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 function App() {
   const [password,setPassword] = useState("");
   const [length,setLength] = useState(8);
   const [numberAllowed,setNumberAllowed] = useState(false);
   const [charAllowed,setCharAllowed] = useState(false);
   
+  const passwordGenerator = useCallback(()=>{
+    let pass ="";
+    let str = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklxcvbnm";
+    if(charAllowed)  str+="!@#$%^&*(){}[]:;><~";
+    if(numberAllowed) str+="0123456789";
+    
+    for(let i=0;i<length;i++){
+      let char = Math.floor(Math.random()*str.length+1);
+      pass += str.charAt(char);
+    }
+    setPassword(pass);
+  },[setPassword,length,numberAllowed,charAllowed])
+
+  useEffect(()=>{
+    passwordGenerator();
+  },[length,charAllowed,numberAllowed,passwordGenerator])
+
   return (
     <>
       <div className="className='w-full max-w-md shadow-md mx-auto rounded-lg px-4 my-8 py-3 text-orange-500 bg-gray-800">
@@ -26,6 +43,7 @@ function App() {
                 min={5}
                 max={100}
                 value={length}
+                className="cursor-pointer"
                 onChange={(e)=>{setLength(e.target.value)}}
               />
               <label>Length: {length}</label>
